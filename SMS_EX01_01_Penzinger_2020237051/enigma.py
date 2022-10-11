@@ -86,9 +86,10 @@ def enigma(x: int, y: int, z: int, plug: str, plain: str):
 if __name__ == '__main__':
     print("\nEX Bonus")
 
-    if len(sys.argv) < 6 or sys.argv[1] != 'init' and sys.argv[3] != 'plug':
+    if len(sys.argv) < 6 or sys.argv[1] != '-init' and sys.argv[3] != '-plug':
         print("Following format required: ")
         print("\n\tpython enigma.py -init 3:22:15 -plug A:H,D:P,X:Y 'Hello world'")
+        exit(1)
 
     plain = sys.argv[5]
     init_values = sys.argv[2].split(':')
