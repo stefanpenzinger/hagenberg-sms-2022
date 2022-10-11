@@ -1,3 +1,6 @@
+import sys
+
+
 _PLAYFAIR_LEN = 5
 
 
@@ -160,3 +163,56 @@ def __index_2d(matrix, value):
     for i, x in enumerate(matrix):
         if value in x:
             return i, x.index(value)
+
+
+if __name__ == '__main__':
+    print("\nEX 1.2")
+
+    if len(sys.argv) < 5 or sys.argv[1] != '-k' and sys.argv[3] != '-e' and sys.argv[3] != '-d':
+        print("Following format required: ")
+        print("\n\tencrypt: python playfair.py -k 'PASSWORD' -e 'SECURE MESSAGE'")
+        print("\n\tdecrypt: python playfair.py -k 'PASSWORD' -d -p 'FJEHJFEHFSIF'")
+        exit(1)
+
+    key = sys.argv[2]
+    show_matrix = False
+    plain = ''
+    cipher = ''
+
+    if sys.argv[3] == '-e':
+        if sys.argv[4] == '-p':
+            if len(sys.argv) == 5:
+                exit("Too few arguments\n\n")
+                print("Following format required: ")
+                print("\n\tencrypt: python playfair.py -k 'PASSWORD' -e 'SECURE MESSAGE'")
+                print("\n\tdecrypt: python playfair.py -k 'PASSWORD' -d -p 'FJEHJFEHFSIF'")
+            show_matrix = True
+            plain = sys.argv[5]
+        else:
+            plain = sys.argv[4]
+
+        play_fair_matrix = create_playfair_matrix(key)
+        cipher = encrypt(plain, play_fair_matrix)
+        print(cipher)
+
+        if show_matrix:
+            print(play_fair_matrix)
+
+    if sys.argv[3] == '-d':
+        if sys.argv[4] == '-p':
+            if len(sys.argv) == 5:
+                exit("Too few arguments\n\n")
+                print("Following format required: ")
+                print("\n\tencrypt: python playfair.py -k 'PASSWORD' -e 'SECURE MESSAGE'")
+                print("\n\tdecrypt: python playfair.py -k 'PASSWORD' -d -p 'FJEHJFEHFSIF'")
+            show_matrix = True
+            cipher = sys.argv[5]
+        else:
+            cipher = sys.argv[4]
+
+        play_fair_matrix = create_playfair_matrix(key)
+        plain = decrypt(cipher, play_fair_matrix)
+        print(plain)
+
+        if show_matrix:
+            print(play_fair_matrix)

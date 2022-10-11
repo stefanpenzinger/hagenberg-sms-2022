@@ -52,4 +52,8 @@ def read_file(file_name: str):
     plain = plain.replace('H', 'z')
     plain = plain.replace('V', 'v')
 
-    print(plain)
+    print("\n" + plain)
+
+
+if __name__ == '__main__':
+    read_file("Chiffre.txt")
